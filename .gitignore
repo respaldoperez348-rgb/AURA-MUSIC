@@ -1,0 +1,13 @@
+# Sockets & Temp files
+*.sock
+*.tmp
+*.log
+/tmp/
+
+# Cache
+__pycache__/
+*.pyc
+
+# Local runtime state
+/dev/shm/*
+.DS_Store
