@@ -109,7 +109,8 @@ AURA-MUSIC/
   El script `music_play.sh` arranca automáticamente el daemon MPV con el socket `/tmp/kiss_music_mpv.sock` y reintentos automáticos. Puedes forzar el reinicio con `music_control.sh quit`.
 
 ---
-![Uploading imagen.png…]()
+<img width="990" height="720" alt="swappy-20261023_235127" src="https://github.com/user-attachments/assets/de1510c6-b830-40c1-aafa-8e7da46a5cc3" />
+
 
 
 
