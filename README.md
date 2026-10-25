@@ -18,13 +18,13 @@
 
 ## ✨ Características Principales
 
-- 🎨 **Estética Frosted Glass & Neón Dinámico**: Renderizado con `Quickshell` en Qt 6 / QML con efectos de desenfoque de fondo nativo (`BackgroundEffect.blurRegion`) y paleta Cyberpunk reactiva.
-- 🚀 **Streaming Directo e Ilimitado de YouTube**: Sin necesidad de claves de API de Google. Transmisión de audio en tiempo real impulsada por `yt-dlp` y el motor `mpv`.
+- 🎨 **Estética Studio Deck & Frosted Glass**: Renderizado con `Quickshell` en Qt 6 / QML con arquitectura panorámica de dos módulos, disco de vinilo animado, espectro de audio neón y desenfoque nativo.
+- 🚀 **Core Backend Persistente & Ultra-Ligero**: Daemon en Python con control instantáneo por socket UNIX directo con MPV y streaming asíncrono vía `yt-dlp`.
 - 🛡️ **Bypass Anti-Bot HTTP 403**: Configuración integrada con extractor Android para evitar bloqueos del servidor y desconexiones de YouTube en streams de audio.
-- ⚡ **Control IPC por Socket Tolerante a Fallos**: Comunicación fluida a través de UNIX Domain Sockets con ejecución por lotes, reconexión automática y tolerancia a latencia.
-- 🔁 **Auto-Advance & Infinite Mix**: Cuando una canción termina, el hook de MPV despacha automáticamente la siguiente canción o genera mezclas dinámicas tipo radio.
-- ⭐ **Biblioteca de Favoritos Persistente**: Guarda canciones en favoritos con un clic en el corazón, almacenadas en JSON local con sincronización inmediata.
-- 🎛️ **Integración MPRIS (D-Bus)**: Controlable desde widgets externos, Dynamic Islands, barras de estado o mediante `playerctl`.
+- ⚡ **IPC Bidireccional en Tiempo Real**: Cero scripts de bash y cero timers ciegos. Eventos empujados por memoria con respuesta inferior a 50 milisegundos.
+- 🔁 **Gestor de Cola y Auto-Advance**: Reproducción continua inteligente sin silencios entre pistas.
+- ⭐ **Biblioteca de Favoritos con Vector Heart**: Guarda y administra tus canciones preferidas con un clic sincronizado en JSON local.
+- 🎛️ **Iconografía Vectorial & Tipografía Nativa**: Integración completa con `JetBrainsMono Nerd Font` e iconos vectoriales puros sin dependencias de fuentes de emojis.
 
 ---
 
@@ -34,7 +34,7 @@ Asegúrate de contar con los siguientes paquetes en tu sistema Arch Linux u otra
 
 ```bash
 # Arch Linux
-sudo pacman -S --needed quickshell mpv yt-dlp socat python
+sudo pacman -S --needed quickshell mpv yt-dlp python
 ```
 
 > **Nota para el Audio**: Se recomienda usar `pipewire` y `pipewire-pulse` para máxima estabilidad y baja latencia.

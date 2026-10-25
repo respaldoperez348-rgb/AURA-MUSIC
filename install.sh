@@ -1,6 +1,6 @@
 #!/bin/bash
 # ==============================================================================
-# Aura Music - Script de Instalación Automatizada
+# Aura Music - Script de Instalación Automatizada (Nueva Arquitectura Studio Deck)
 # ==============================================================================
 set -e
 
@@ -18,11 +18,11 @@ echo "  / /| |/ / / / ___/ __ \`/_____/ /_/ / / / / ___/ / ___/ "
 echo " / ___ / /_/ / /  / /_/ /_____/ __  / /_/ (__  ) / /__   "
 echo "/_/  |_\__,_/_/   \__,_/     /_/ /_/\__,_/____/_/\___/   "
 echo -e "${RESET}"
-echo -e "${BOLD}Instalador Automatizado de Aura Music para Quickshell & Hyprland${RESET}\n"
+echo -e "${BOLD}Instalador Automatizado de Aura Music Studio Deck para Hyprland / Wayland${RESET}\n"
 
 # 1. Comprobación de Dependencias
 echo -e "${CYAN}[1/4]${RESET} Verificando dependencias del sistema..."
-DEPS=("quickshell" "mpv" "yt-dlp" "socat" "python3")
+DEPS=("quickshell" "mpv" "yt-dlp" "python3")
 MISSING=()
 
 for dep in "${DEPS[@]}"; do
@@ -54,16 +54,17 @@ QS_DIR="$HOME/.config/quickshell"
 YTDLP_DIR="$HOME/.config/yt-dlp"
 
 echo -e "\n${CYAN}[2/4]${RESET} Desplegando archivos en $QS_DIR..."
+mkdir -p "$QS_DIR/core"
 mkdir -p "$QS_DIR/components"
-mkdir -p "$QS_DIR/scripts"
 mkdir -p "$YTDLP_DIR"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Copiar componentes y scripts
-cp -v "$SCRIPT_DIR/components/MusicPlayer.qml" "$QS_DIR/components/"
-cp -v "$SCRIPT_DIR/scripts/"* "$QS_DIR/scripts/"
-chmod +x "$QS_DIR/scripts/"*.sh "$QS_DIR/scripts/"*.py 2>/dev/null || true
+# Copiar Core Daemon, Componentes y UI
+cp -rf "$SCRIPT_DIR/core/"* "$QS_DIR/core/"
+cp -rf "$SCRIPT_DIR/components/"*.qml "$QS_DIR/components/"
+cp -f "$SCRIPT_DIR/Theme.qml" "$QS_DIR/Theme.qml" 2>/dev/null || true
+cp -f "$SCRIPT_DIR/shell.qml" "$QS_DIR/shell.qml" 2>/dev/null || true
 
 # Copiar configuración de yt-dlp (evita HTTP 403 de YouTube)
 if [ -f "$SCRIPT_DIR/config/yt-dlp/config" ]; then
@@ -85,16 +86,12 @@ fi
 
 # 3. Permisos
 echo -e "\n${CYAN}[3/4]${RESET} Ajustando permisos de ejecución..."
-chmod +x "$QS_DIR/scripts/music_play.sh"
-chmod +x "$QS_DIR/scripts/music_control.sh"
-chmod +x "$QS_DIR/scripts/music_search.py"
-chmod +x "$QS_DIR/scripts/favorites.py"
+chmod +x "$QS_DIR/core/"*.py 2>/dev/null || true
 echo -e "  ${GREEN}✓${RESET} Permisos otorgados."
 
 # 4. Información de integración
 echo -e "\n${CYAN}[4/4]${RESET} ${GREEN}${BOLD}¡Instalación completada con éxito!${RESET}\n"
 echo -e "${BOLD}Integración sugerida para Hyprland (~/.config/hypr/hyprland.conf o binds.conf):${RESET}"
-echo -e "${YELLOW}bind = \$mainMod, Y, exec, quickshell ipc call musicplayer toggle${RESET}"
-echo -e "${YELLOW}bind = \$mainMod, R, exec, ~/.config/quickshell/scripts/music_control.sh quit; quickshell ipc call musicplayer close${RESET}\n"
+echo -e "${YELLOW}bind = \$mainMod, Y, exec, quickshell ipc call musicplayer toggle${RESET}\n"
 echo -e "${BOLD}Para probar de forma independiente:${RESET}"
 echo -e "${CYAN}quickshell -p $SCRIPT_DIR/shell.qml${RESET}\n"

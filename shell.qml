@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import Quickshell.Wayland
 import "components"
 
@@ -23,18 +24,6 @@ ShellRoot {
         }
         function close(): void {
             root.musicPlayerOpen = false;
-        }
-        function autoNext(): void {
-            if (musicPlayerContainer) musicPlayerContainer.autoNext();
-        }
-        function next(): void {
-            if (musicPlayerContainer) musicPlayerContainer.playNextSong(true);
-        }
-        function prev(): void {
-            if (musicPlayerContainer) musicPlayerContainer.playPreviousSong(true);
-        }
-        function togglePlay(): void {
-            if (musicPlayerContainer) musicPlayerContainer.togglePlay();
         }
     }
 
@@ -64,7 +53,7 @@ ShellRoot {
             item: musicPlayerContainer.card
         }
 
-        MusicPlayer {
+        StudioDeck {
             id: musicPlayerContainer
             theme: globalTheme
             isOpen: root.musicPlayerOpen
