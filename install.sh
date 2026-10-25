@@ -60,11 +60,9 @@ mkdir -p "$YTDLP_DIR"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Copiar Core Daemon, Componentes y UI
 cp -rf "$SCRIPT_DIR/core/"* "$QS_DIR/core/"
 cp -rf "$SCRIPT_DIR/components/"*.qml "$QS_DIR/components/"
 cp -f "$SCRIPT_DIR/Theme.qml" "$QS_DIR/Theme.qml" 2>/dev/null || true
-cp -f "$SCRIPT_DIR/shell.qml" "$QS_DIR/shell.qml" 2>/dev/null || true
 
 # Copiar configuración de yt-dlp (evita HTTP 403 de YouTube)
 if [ -f "$SCRIPT_DIR/config/yt-dlp/config" ]; then

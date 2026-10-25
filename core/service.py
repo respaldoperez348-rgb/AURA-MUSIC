@@ -367,6 +367,18 @@ class AuraService:
         emit("track", track=self.current_track, index=self.current_index)
         is_fav = self.favorites.is_favorite(track.get("id"))
         emit("current_favorite_status", isFavorite=is_fav)
+
+        # Write metadata to RAM for MediaIsland (Dynamic Island) sync
+        try:
+            with open("/dev/shm/aura_now_playing.json", "w", encoding="utf-8") as f:
+                json.dump({
+                    "url": url,
+                    "title": track.get("title", "Música"),
+                    "artist": track.get("artist", "Aura Music"),
+                    "thumbnail": track.get("thumbnail", "")
+                }, f, ensure_ascii=False)
+        except Exception:
+            pass
         
         self.mpv.load_track(url)
 

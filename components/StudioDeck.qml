@@ -18,6 +18,11 @@ Item {
         id: globalState
     }
 
+    function togglePlay(): void { globalState.togglePlay(); }
+    function playNextSong(manual): void { globalState.nextTrack(); }
+    function playPreviousSong(manual): void { globalState.prevTrack(); }
+    function autoNext(): void { globalState.nextTrack(); }
+
     // Main Studio Container
     Item {
         id: deckContainer
